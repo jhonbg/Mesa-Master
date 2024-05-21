@@ -93,18 +93,20 @@ const ViewTables: React.FC = () => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              sx={{
-                flexGrow: 1,
-                fontfamily: 'Segoe UI',
-                fontWeight: 700,
-                color: "rgb(12,12,133)",
-                textDecoration: 'none',
-              }}
-            >
-              La Empacadora
+                variant="h6"
+                noWrap
+                component="a"
+                sx={{
+                  flexGrow: 1,
+                  fontfamily:  'Segoe UI',
+                  fontWeight: 700,
+                  color: "rgb(243,164,102)",
+                  WebkitTextStroke: '1px black', 
+                  fontFamily:'cursive',
+                  textDecoration: 'none',
+                }}
+              >
+                MesaMaster
             </Typography>
             <Button variant="contained" style={{ backgroundColor: "rgb(230, 230, 230)", color: 'rgb(12,12,133)', marginLeft: 'auto' }} onClick={handleDrawerOpen}>Perfil</Button>
             <Button variant="contained" style={{ backgroundColor: "rgb(230, 230, 230)", color: 'rgb(12,12,133)', marginLeft: 'auto' }} onClick={handleInitialPage}>Menu Inicial</Button>

@@ -125,6 +125,11 @@ const InitialPage: React.FC = () => {
           navigate(`/ViewTables/${token}`);
         };
 
+      const handlePedido = () => 
+        {
+          navigate(`/Pedido/${token}`);
+        }  
+
       const styleButtonMenu = {
         backgroundColor: "transparent",
         color: 'rgb(12, 12, 133)',
@@ -142,7 +147,7 @@ const InitialPage: React.FC = () => {
         <AppBar position="static" style={{backgroundColor:'rgb(192, 192, 192)'}}>
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-              <Typography
+            <Typography
                 variant="h6"
                 noWrap
                 component="a"
@@ -150,11 +155,13 @@ const InitialPage: React.FC = () => {
                   flexGrow: 1,
                   fontfamily:  'Segoe UI',
                   fontWeight: 700,
-                  color: "rgb(12,12,133)",
+                  color: "rgb(243,164,102)",
+                  WebkitTextStroke: '1px black', 
+                  fontFamily:'cursive',
                   textDecoration: 'none',
                 }}
               >
-                La Empacadora
+                MesaMaster
               </Typography>
               <Button variant="contained" style={{ backgroundColor: "rgb(230, 230, 230)", color: 'rgb(12,12,133)', marginLeft: 'auto' }} onClick={handleDrawerOpen}>Perfil</Button>
               <Tooltip title="Cerrar Sesión">
@@ -196,14 +203,15 @@ const InitialPage: React.FC = () => {
         <Paper elevation={24} style={{ padding: '50px', marginBottom: '50px', maxWidth: '500px', width: '100%', textAlign: 'center' }}>
           <Container maxWidth="xs" style={{ flex: "200", width: "100%" }}>
         <Grid container spacing={3} direction="column">
-            {(userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR' ||userRol === 'MESERO') && <Grid xs>
+            {(userRol === 'MESERO' ||userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR') && <Grid xs>
                 <Item>
-                    <Button variant="contained"style={styleButtonMenu}>Pedidos</Button>
+                    <Button variant="contained" style={styleButtonMenu} onClick={handleNewOrder} >Pedido Nuevo</Button>       
+
                 </Item>
             </Grid>}
-            {(userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR'||userRol === 'GENERAL') && <Grid xs>
+            {(userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR' ||userRol === 'MESERO'||userRol === 'GENERAL') && <Grid xs>
                 <Item>
-                    <Button variant="contained" style={styleButtonMenu}>Pedidos Despachados</Button>
+                    <Button variant="contained"style={styleButtonMenu} onClick={handlePedido}>Administración de Pedidos</Button>
                 </Item>
             </Grid>}
             {(userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR' ||userRol === 'MESERO')&& <Grid xs>
@@ -211,27 +219,16 @@ const InitialPage: React.FC = () => {
                     <Button variant="contained" style={styleButtonMenu} onClick={handleTables}>Mesas</Button>
                 </Item>
             </Grid>}
-            {(userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR'||userRol === 'GENERAL') && <Grid xs>
-                <Item>
-                    <Button variant="contained" style={styleButtonMenu}>Ventas</Button>
+            {(userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR') && <Grid xs>
+                <Item>        
+                    <Button variant="contained" style={styleButtonMenu} onClick={handleProductNew}>Menu Productos</Button>
                 </Item>
             </Grid>}
             {(userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR') && <Grid xs>
                 <Item>
                     <Button variant="contained" style={styleButtonMenu} onClick={handleUserManager}>Administrar Empleado</Button>
                 </Item>
-            </Grid>}
-            {(userRol === 'MESERO' ||userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR') && <Grid xs>
-                <Item>
-                    <Button variant="contained" style={styleButtonMenu} onClick={handleNewOrder} >Pedido Nuevo</Button>       
-
-                </Item>
             </Grid>} 
-            {(userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR') && <Grid xs>
-                <Item>        
-                    <Button variant="contained" style={styleButtonMenu} onClick={handleProductNew}>Menu Productos</Button>
-                </Item>
-            </Grid>}
         </Grid>
         </Container>
           </Paper>

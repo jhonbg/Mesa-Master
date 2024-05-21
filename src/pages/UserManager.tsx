@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import HttpAction from "../componets/middlewares/HttpAction";
-import {Container, Toolbar, Button, Typography, AppBar, Box, Drawer, List , ListItem, ListItemText, Tooltip, Card, CardHeader, CardContent, Collapse, TextField, NativeSelect, InputLabel} from '@mui/material';
+import {Container, Toolbar, Button, Typography, AppBar, Box, Drawer, List , ListItem, ListItemText, Tooltip, Card, CardHeader, CardContent, Collapse, TextField} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -269,11 +269,13 @@ useEffect(() => {
                   flexGrow: 1,
                   fontfamily:  'Segoe UI',
                   fontWeight: 700,
-                  color: "rgb(12,12,133)",
+                  color: "rgb(243,164,102)",
+                  WebkitTextStroke: '1px black', 
+                  fontFamily:'cursive',
                   textDecoration: 'none',
                 }}
               >
-                La Empacadora
+                MesaMaster
               </Typography>
               <Button variant="contained" style={{ backgroundColor: "rgb(230, 230, 230)", color: 'rgb(12,12,133)', marginLeft: 'auto' }} onClick={handleDrawerOpen}>Perfil</Button>
               <Button variant="contained" style={{ backgroundColor: "rgb(230, 230, 230)", color: 'rgb(12,12,133)', marginLeft: 'auto' }} onClick={handleInitialPage}>Menu Inicial</Button>

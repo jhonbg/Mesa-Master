@@ -109,7 +109,7 @@ const ProductForm: React.FC = () => {
       <AppBar position="static" style={{backgroundColor:'rgb(192, 192, 192)'}}>
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-              <Typography
+            <Typography
                 variant="h6"
                 noWrap
                 component="a"
@@ -117,11 +117,13 @@ const ProductForm: React.FC = () => {
                   flexGrow: 1,
                   fontfamily:  'Segoe UI',
                   fontWeight: 700,
-                  color: "rgb(12,12,133)",
+                  color: "rgb(243,164,102)",
+                  WebkitTextStroke: '1px black', 
+                  fontFamily:'cursive',
                   textDecoration: 'none',
                 }}
               >
-                La Empacadora
+                MesaMaster
               </Typography>
               <Button variant="contained" style={{ backgroundColor: "rgb(230, 230, 230)", color: 'rgb(12,12,133)', marginLeft: 'auto' }} onClick={handleDrawerOpen}>Perfil</Button>
               <Button variant="contained" style={{ backgroundColor: "rgb(230, 230, 230)", color: 'rgb(12,12,133)', marginLeft: 'auto' }} onClick={handleInitialPage}>Menu Inicial</Button>

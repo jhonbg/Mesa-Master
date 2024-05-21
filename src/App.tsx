@@ -11,6 +11,7 @@ import ViewTables from './pages/ViewTables';
 import OrderHome from './pages/OrderHome';
 import AddProduct from './pages/AddProduct';
 import { OrderContextProvider } from './pages/OrderContextProps';
+import Pedidos from './pages/Pedidos';
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
         <Route path='/ProductForm/:token' element={<ProductForm/>}/>
         <Route path='/ViewTables/:token' element={<ViewTables/>}/>
         <Route path='/OrderHome/:token' element={<OrderContextProvider><OrderHome/></OrderContextProvider>}/>
-        <Route path='/AddProduct/:token' element={<OrderContextProvider><AddProduct/></OrderContextProvider>}/>
+        <Route path='/AddProduct/:token' element={<OrderContextProvider><AddProduct /></OrderContextProvider>} />
+        <Route path='/Pedido/:token' element={<Pedidos/>}/>
       </Routes>
     </Router>
   );
