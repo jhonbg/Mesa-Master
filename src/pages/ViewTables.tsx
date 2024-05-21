@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import HttpAction from "../componets/middlewares/HttpAction";
 import axios from 'axios';
 import TableBarIcon from '@mui/icons-material/TableBar';
+import ModalCrearMesa from '../componets/common/ModalCrearMesa';
 
 interface Mesa {
   idMesa: number;
@@ -21,7 +22,9 @@ const ViewTables: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { token } = useParams<{ token?: string }>();
   const [openModal, setOpenModal] = useState(false);
+  const [openModalMesa, setOpenModalMesa] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const [mesaAEliminar, setMesaAEliminar] = useState<number | null>(null);
   const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
@@ -42,23 +45,30 @@ const ViewTables: React.FC = () => {
   const handleOpenModal = (message: string) => {
     setModalMessage(message);
     setOpenModal(true);
-  };    
+  };
+  
+  const handleOpenModalMesa = () => {
+    setOpenModalMesa(true);
+  }
+
+  const handleCloseModalMesa = () => {
+    setOpenModalMesa(false);
+  }
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    navigate('/');
+  };
+
+  const fetchMesas = async () => {
+    try {
+      const response = await axios.get('http://localhost:8090/laempacadora/api/mesas/all');
+      setMesaList(response.data);
+    } catch (error) {
+      console.error('Error fetching mesas:', error);
+    }
   };
 
   useEffect(() => {
-    const fetchMesas = async () => {
-      try {
-        const response = await axios.get('http://localhost:8090/laempacadora/api/mesas/all');
-        setMesaList(response.data);
-      } catch (error) {
-        console.error('Error fetching mesas:', error);
-      }
-    };
-
     fetchMesas();
   }, []);
 
@@ -136,42 +146,52 @@ const ViewTables: React.FC = () => {
         </List>
       </Drawer>
       <Box display="flex" justifyContent="center" alignItems="center" height="100vh" style={{ width: '100%' }}>
-  <Container maxWidth="xs" style={{ flex: "200", width: "100%", borderStyle: 'solid', borderColor: "rgb(230, 230, 230)", backgroundColor: "rgb(230, 230, 230)", flexDirection: 'row' }}>
-    <Typography variant="h4" align="center" gutterBottom>
-      Estado de Mesas
-    </Typography>
-    <div style={{ width: '100%', maxHeight: 'calc(60vh - 250px)', overflowY: 'auto', marginBottom: '10px' }}>
-      <Grid container spacing={2}>
-        {mesaList.filter((mesa) => mesa.idMesa !== 0).map((mesa) => (
-          <Grid item xs={3} key={mesa.idMesa}>
-            <Paper
-              elevation={3}
-              style={{
-                width: '100%',
-                height: 100,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: mesa.estado ? 'green' : 'white',                
-              }}
-            > 
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <Tooltip title={"Mesa" + mesa.idMesa} style={{alignItems: 'center'}}>
-                <IconButton >
-                  <TableBarIcon style={{ color: mesa.estado ? 'white' : 'black' }} />
-                </IconButton>
-              </Tooltip>
-              <Typography variant="h6" align="center" color={mesa.estado ? 'white' : 'black'} style={{ marginLeft: '5px' }}>
-                Mesa {mesa.idMesa}
-              </Typography>
-            </div>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
-    </div>
-  </Container>
-</Box>
+        <Container maxWidth="xs" style={{ flex: "200", width: "100%", borderStyle: 'solid', borderColor: "rgb(230, 230, 230)", backgroundColor: "rgb(230, 230, 230)", flexDirection: 'row' }}>
+          <Typography variant="h4" align="center" gutterBottom>
+            Estado de Mesas
+          </Typography>
+          <div style={{ width: '100%', maxHeight: 'calc(60vh - 250px)', overflowY: 'auto', marginBottom: '10px' }}>
+            <Grid container spacing={2}>
+              {mesaList.filter((mesa) => mesa.idMesa !== 0).map((mesa) => (
+                <Grid item xs={3} key={mesa.idMesa}>
+                  <Paper
+                    elevation={3}
+                    style={{
+                      width: '100%',
+                      height: 100,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: mesa.estado ? 'green' : 'white',                
+                    }}
+                  > 
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    <Tooltip title={"Mesa" + mesa.idMesa} style={{alignItems: 'center'}}>
+                      <IconButton>
+                        <TableBarIcon style={{ color: mesa.estado ? 'white' : 'black' }} />
+                      </IconButton>
+                    </Tooltip>
+                    <Typography variant="h6" align="center" color={mesa.estado ? 'white' : 'black'} style={{ marginLeft: '5px' }}>
+                      Mesa {mesa.idMesa}
+                    </Typography>
+                  </div>
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+          {(userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR') && <Button
+            type="submit"
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={handleOpenModalMesa}
+          >
+            Agregar mesa
+          </Button>
+          }
+        </Container>
+      </Box>
+      <ModalCrearMesa open={openModalMesa} onClose={handleCloseModalMesa} fetchMesas={fetchMesas} />
     </>
   );
 };
