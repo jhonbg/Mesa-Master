@@ -109,10 +109,9 @@ const UserManager: React.FC = () => {
     setModalMessage(message);
     setOpenModal(true);
   };    
-  // Función para cerrar el modal
+  
   const handleCloseModal = () => {
     setOpenModal(false);
-    navigate('/');
   };
   const resetTimeout = () => {
     if (timeout) {
@@ -120,7 +119,7 @@ const UserManager: React.FC = () => {
     }
     timeout = setTimeout(() => {
       navigate("/");
-    }, 1800000);
+    }, 1500000);
   };
 
   const activityHandler = () => {
@@ -160,9 +159,9 @@ try {
       "estadoEmpleado": newUserEstado,
       "salario": parseFloat(newUserSalario)
       };  
-      console.log(jsonUser);
   const response = await axios.put('http://localhost:8090/laempacadora/api/empleado/update', jsonUser);
   setError('');
+  handleOpenModal('El empleado se actualizó correctamente.')
   setEditedEmployee(response.data);
 } catch (error) {
   if (axios.isAxiosError(error)) {
@@ -187,6 +186,13 @@ const styleButtonMenu = {
     marginTop:'5%'
 };
 
+const updateEmployeeInList = (updatedEmployee: Employee) => {
+  setEmployeeList((prevList) =>
+    prevList.map((employee) =>
+      employee.idEmpleado === updatedEmployee.idEmpleado ? updatedEmployee : employee
+    )
+  );
+};
 
 useEffect(() => {
   if (employee) {
@@ -197,7 +203,8 @@ useEffect(() => {
 
 useEffect(() => {
   if (editedEmployee) {
-     window.location.reload(); 
+    updateEmployeeInList(editedEmployee);
+    setEditedEmployee(null); 
   }
 }, [editedEmployee]);
        
@@ -248,9 +255,8 @@ useEffect(() => {
                     navigate('/')
                   }
             } catch (error) {
-                //alert('¡Tu sesión ha expirado! Por favor, inicia sesión nuevamente.');
                 handleOpenModal('¡Tu sesión ha expirado! Por favor, inicia sesión nuevamente.');     
-                //navigate(`/`);
+                navigate(`/`);
             }
         };
         fetchData();

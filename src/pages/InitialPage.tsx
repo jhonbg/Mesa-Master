@@ -50,7 +50,7 @@ const InitialPage: React.FC = () => {
     }
     timeout = setTimeout(() => {      
       handleOpenModal('¡Tu sesión ha expirado! Por favor, inicia sesión nuevamente.');                  
-    }, 1800000);
+    }, 1500000);
   };
 
   const activityHandler = () => {

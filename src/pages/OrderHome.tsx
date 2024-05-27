@@ -14,7 +14,6 @@ import moment from 'moment';
 const OrderHome: React.FC = () => {
     const location = useLocation();
     const orderType = location.state && location.state.orderType;
-    const [estadoMesa, setEstadoMesa] = useState(false);
     const [mesaList, setMesaList] = useState<any[]>([]);
     const { idPedido, setIdPedido } = useOrderContext();
     const [idMesa, setIdMesa] = useState(0);  

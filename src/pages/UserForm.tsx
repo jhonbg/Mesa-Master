@@ -22,6 +22,8 @@ const UserForm: React.FC = () => {
     const [error, setError] = useState('');
     const [drawerOpen, setDrawerOpen] = useState(false);
     const { token } = useParams<{ token?: string }>();
+    const [openModal, setOpenModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
     const navigate = useNavigate();
 
     const handleLogOut = () => {
@@ -39,6 +41,16 @@ const UserForm: React.FC = () => {
       setDrawerOpen(false);
     };
 
+    const handleOpenModal = (message: string) => {
+      setModalMessage(message);
+      setOpenModal(true);
+    };    
+   
+    const handleCloseModal = () => {
+      setOpenModal(false);
+      navigate('/');
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
@@ -52,6 +64,8 @@ const UserForm: React.FC = () => {
                 };
             const response = await axios.post('http://localhost:8090/laempacadora/api/auth/register', jsonUser);
             setError('');
+            handleOpenModal('Se ha creado un nuevo empleado.')
+            navigate(`/InitialPage/${token}`);
         } catch (error) {
             console.log(error)
             if (axios.isAxiosError(error)) {
@@ -238,7 +252,7 @@ const UserForm: React.FC = () => {
                 </form>
               </div>
             </Container>
-            </Paper>
+          </Paper>
         </Box>
     </div>
     );

@@ -30,30 +30,10 @@ interface ExpandMoreProps extends IconButtonProps {
     };
   }
 
-  type Product = {
-    idProducto: number;
-    nombre: string;
-    precio: number;
-    descripcion: string;
-};
-  
-  const ExpandMore = styled((props: ExpandMoreProps) => {
-    const { expand, ...other } = props;
-    return <IconButton {...other} />;
-  })(({ theme, expand }) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  }));
-
 const AddProduct: React.FC = () => {
     const { token } = useParams<{ token?: string }>();
     const [error, setError] = useState('');
-    const [editedProducto, setEditedProducto] = useState<Product | null>(null);
     const [userData, setUserData] = useState<any>(null);
-    const [detallePedido, setDetallePedido] = useState<[]>([]);
     const [userRol, setUserRol] = useState();
     const [precioFinal, setprecioFinal] = useState<number>(0);
     const [userNombre, setUserNombre] = useState();
@@ -61,8 +41,6 @@ const AddProduct: React.FC = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [userInactivity, setUserInactivity] = useState(true);
     const [listaDetallePedido, setListaDetallePedido] = useState<DetallePedido[]>([]);
-    const [searchName, setSearchName] = useState("");
-    const [productQuantity, setNewProductQuantity] = useState('');
     const navigate = useNavigate();
     const [openModal, setOpenModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');  
@@ -90,7 +68,7 @@ const AddProduct: React.FC = () => {
     }
     timeout = setTimeout(() => {
       navigate("/");
-    }, 1800000);
+    }, 1500000);
   };
 
   const activityHandler = () => {
@@ -113,48 +91,50 @@ const AddProduct: React.FC = () => {
     navigate(`/InitialPage/${token}`);
   };
   
-    const handleMostrarLista = async () => {
-      try {
-        await Promise.all(listaDetallePedido.map(async (detalle) => {
-          let precioF = 0;
-          if (precioFinal === 0) {
-            precioF = detalle.producto.precio * detalle.cantidad;
-          } else {
-            precioF = precioFinal + (detalle.producto.precio * detalle.cantidad);
-          }
-    
-          setprecioFinal(precioF);
-    
-          const jsonUserpf = {
-            "idPedido": idPedido,
-            "precioFinal": precioF
-          };
-    
-          console.log(jsonUserpf);
-    
-          const jsonUser = {
-            "idProducto": detalle.producto.idProducto,
-            "cantidad": detalle.cantidad,
-            "estado": false,
-            "idPedido": idPedido
-          };
-    
-          const response = await axios.post('http://localhost:8090/laempacadora/api/detalleproducto/save', jsonUser);
-          const responde = await axios.put('http://localhost:8090/laempacadora/api/pedidos/updateFinalPrice', jsonUserpf);
-          navigate(`/InitialPage/${token}`);
-        }));
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          if (error.response?.status === 404) {
-            setError('El ID del usuario ya existe');
-          } else {
-            setError('Error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.');
-          }
+  const handleMostrarLista = async () => {
+    try {
+      let precioF = 0;
+  
+      // Calcular el precio final total
+      listaDetallePedido.forEach((detalle) => {
+        precioF += detalle.producto.precio * detalle.cantidad;
+      });
+  
+      setprecioFinal(precioF);
+  
+      const jsonUserpf = {
+        "idPedido": idPedido,
+        "precioFinal": precioF
+      };
+  
+      console.log(jsonUserpf);
+  
+      await Promise.all(listaDetallePedido.map(async (detalle) => {
+        const jsonUser = {
+          "idProducto": detalle.producto.idProducto,
+          "cantidad": detalle.cantidad,
+          "estado": false,
+          "idPedido": idPedido
+        };
+  
+        await axios.post('http://localhost:8090/laempacadora/api/detalleproducto/save', jsonUser);
+      }));
+  
+      await axios.put('http://localhost:8090/laempacadora/api/pedidos/updateFinalPrice', jsonUserpf);
+      navigate(`/InitialPage/${token}`);
+  
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 404) {
+          setError('El ID del usuario ya existe');
         } else {
           setError('Error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.');
         }
+      } else {
+        setError('Error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.');
       }
-    };   
+    }
+  };   
 
 const handleOpenModalProducto = () => {
   setOpenModalProducto(true);

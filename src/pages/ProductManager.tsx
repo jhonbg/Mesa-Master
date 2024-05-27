@@ -72,10 +72,9 @@ const ProductManager: React.FC = () => {
     setModalMessage(message);
     setOpenModal(true);
   };    
-  // Función para cerrar el modal
+ 
   const handleCloseModal = () => {
     setOpenModal(false);
-    navigate('/');
   };
   const resetTimeout = () => {
     if (timeout) {
@@ -83,7 +82,7 @@ const ProductManager: React.FC = () => {
     }
     timeout = setTimeout(() => {
       navigate("/");
-    }, 1800000);
+    }, 1500000);
   };
 
   const activityHandler = () => {
@@ -127,17 +126,11 @@ try {
   const response = await axios.put('http://localhost:8090/laempacadora/api/productos/update', jsonUser);
   setError('');
   setEditedProducto(response.data);
-} catch (error) {
-  if (axios.isAxiosError(error)) {
-    if (error.response?.status === 404) {
-        setError('El ID del usuario ya existe');
-    } else {
-        setError('Error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.');
-    }
-} else {
-    setError('Error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.');
-}
-}
+  handleOpenModal('El producto ha sido actualizado.');
+} 
+  catch (error) {
+ 
+  }
 };
 
 const styleButtonMenu = {
@@ -150,10 +143,18 @@ const styleButtonMenu = {
     marginTop:'5%'
 };
 
+const updateProductosInList = (updatedProduct: Product) => {
+  setProductList((prevList) =>
+    prevList.map((product) =>
+      product.idProducto === updatedProduct.idProducto ? updatedProduct : product
+    )
+  );
+};
 
 useEffect(() => {
   if (editedProducto) {
-     window.location.reload(); 
+    updateProductosInList(editedProducto);
+    setEditedProducto(null); 
   }
 }, [editedProducto]);
        
@@ -207,9 +208,8 @@ useEffect(() => {
                     navigate('/')
                   }
             } catch (error) {
-                //alert('¡Tu sesión ha expirado! Por favor, inicia sesión nuevamente.');
                 handleOpenModal('¡Tu sesión ha expirado! Por favor, inicia sesión nuevamente.');     
-                //navigate(`/`);
+                navigate(`/`);
             }
         };
         fetchData();

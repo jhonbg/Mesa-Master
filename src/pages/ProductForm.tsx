@@ -26,7 +26,6 @@ const ProductForm: React.FC = () => {
     const [newProductNombre, setNewProductNombre] = useState('');
     const [newProductPrecio, setNewProductPrecio] = useState<string>('');
     const [newProductDescripcion, setNewProductDescripcion] = useState('');
-    const [product, setProduct] = useState<Product | null>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
@@ -41,6 +40,8 @@ const ProductForm: React.FC = () => {
                 };
             const response = await axios.post('http://localhost:8090/laempacadora/api/productos/save', jsonUser);
             setError('');
+            handleOpenModal('Producto creado correctamente.');
+            navigate(`/ProductManager/${token}`)
         } catch (error) {
             console.log(error)
             if (axios.isAxiosError(error)) {
@@ -62,7 +63,6 @@ const ProductForm: React.FC = () => {
       // Función para cerrar el modal
       const handleCloseModal = () => {
         setOpenModal(false);
-        navigate('/');
       };
 
       const handleLogOut = () => {
@@ -96,9 +96,8 @@ const ProductForm: React.FC = () => {
                     navigate('/')
                   }
             } catch (error) {
-                //alert('¡Tu sesión ha expirado! Por favor, inicia sesión nuevamente.');
                 handleOpenModal('¡Tu sesión ha expirado! Por favor, inicia sesión nuevamente.');     
-                //navigate(`/`);
+                navigate(`/`);
             }
         };
         fetchData();
@@ -196,7 +195,7 @@ const ProductForm: React.FC = () => {
                 />
                 <TextField
                     id="outlined-number"
-                    label="Salario del Empleado"
+                    label="Precio Producto"
                     type="number"
                     sx={{ width: 300, marginBottom:'10px',marginLeft:'-10px' }}
                       InputLabelProps={{

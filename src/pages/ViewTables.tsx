@@ -24,7 +24,6 @@ const ViewTables: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openModalMesa, setOpenModalMesa] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
-  const [mesaAEliminar, setMesaAEliminar] = useState<number | null>(null);
   const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
@@ -54,10 +53,6 @@ const ViewTables: React.FC = () => {
   const handleCloseModalMesa = () => {
     setOpenModalMesa(false);
   }
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-  };
 
   const fetchMesas = async () => {
     try {

@@ -261,57 +261,63 @@ const handleStateAndTable = async (estado: number) => {
             </Table>
           </StyledPaper>
         </Box>
-        <div style={{ display: 'flex', flexDirection: 'row', marginTop:'10px', marginLeft: 'auto'}}>
-          {(activeStep == 0) && (userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR'||userRol === 'GENERAL') &&
-          <Button
-            variant="contained"
-            style={{
-              backgroundColor: 'rgb(230, 230, 230)',
-              color: 'rgb(12, 12, 133)',
-              marginBottom: '10px',
-              marginRight: '5px'
-            }}
-            onClick={() => handleState(1)}
-          >
-            En Preparación
-          </Button>}  
-          {(activeStep == 1) && (userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR'||userRol === 'GENERAL') &&
-          <Button
-            variant="contained"
-            style={{
-              backgroundColor: 'rgb(230, 230, 230)',
-              color: 'rgb(12, 12, 133)',
-              marginBottom: '10px'
-            }}
-            onClick={() => handleState(2)}
-          >
-            Preparado
-          </Button>} 
-          {(activeStep == 2) && (userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR'||userRol === 'MESERO') &&
-          <Button
-            variant="contained"
-            style={{
-              backgroundColor: 'rgb(230, 230, 230)',
-              color: 'rgb(12, 12, 133)',
-              marginBottom: '10px'
-            }}
-            onClick={() => handleState(3)}
-          >
-            Entregado
-          </Button>} 
-          {(activeStep == 3) && (userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR'||userRol === 'GENERAL') &&
-          <Button
-            variant="contained"
-            style={{
-              backgroundColor: 'rgb(230, 230, 230)',
-              color: 'rgb(12, 12, 133)',
-              marginBottom: '10px'
-            }}
-            onClick={() => handelOpenModalPedido()}
-          >
-            Pagado
-          </Button>} 
-        </div>
+        <div style={{marginLeft: 'auto', display:'flex',flexDirection:'column'}}>
+          <div style={{ display: 'flex', flexDirection: 'row', marginTop:'10px'}}>
+            {(activeStep == 0) && (userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR'||userRol === 'GENERAL') &&
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: 'rgb(230, 230, 230)',
+                color: 'rgb(12, 12, 133)',
+                marginBottom: '10px',
+                marginRight: '5px',
+                marginLeft:'auto'
+              }}
+              onClick={() => handleState(1)}
+            >
+              En Preparación
+            </Button>}  
+            {(activeStep == 1) && (userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR'||userRol === 'GENERAL') &&
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: 'rgb(230, 230, 230)',
+                color: 'rgb(12, 12, 133)',
+                marginBottom: '10px',
+                marginLeft:'auto'
+              }}
+              onClick={() => handleState(2)}
+            >
+              Preparado
+            </Button>} 
+            {(activeStep == 2) && (userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR'||userRol === 'MESERO') &&
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: 'rgb(230, 230, 230)',
+                color: 'rgb(12, 12, 133)',
+                marginBottom: '10px',
+                marginLeft:'auto'
+              }}
+              onClick={() => handleState(3)}
+            >
+              Entregado
+            </Button>} 
+            {(activeStep == 3) && (userRol === 'SUPER_USER'||userRol === 'ADMINISTRADOR'||userRol === 'GENERAL') &&
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: 'rgb(230, 230, 230)',
+                color: 'rgb(12, 12, 133)',
+                marginBottom: '10px',
+                marginLeft:'auto'
+              }}
+              onClick={() => handelOpenModalPedido()}
+            >
+              Pagado
+            </Button>} 
+          </div> 
+        </div>  
       </div>
       <ModalPedido open={openModalPedido} onClose={handleCloseModalPedido} pedido={pedidoSelect} handleStateAndTable={handleStateAndTable}/>
     </div>

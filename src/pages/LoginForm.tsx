@@ -9,8 +9,6 @@ const LoginForm: React.FC = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    const [openModal, setOpenModal] = useState(false);
-    const [modalMessage, setModalMessage] = useState('');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
