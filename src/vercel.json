@@ -1,0 +1,3 @@
+{
+    "builds":[{ "src": "./index.tsx", "use": "@vercel/node"}]
+}
