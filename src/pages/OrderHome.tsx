@@ -54,7 +54,7 @@ const OrderHome: React.FC = () => {
               "direccion": newAddressCustomer,
               "telefono": newPhoneCustomer
               };
-          const response = await axios.post('http://localhost:8090/laempacadora/api/pedidos/save', jsonUser);
+          const response = await axios.post('https://mesamaster-backend.onrender.com/pedidos/save', jsonUser);
           const idPedido = response.data.idPedido;
           setIdPedido(idPedido);
           handleMesa();
@@ -80,7 +80,7 @@ const OrderHome: React.FC = () => {
           "idMesa": idMesa,
           "estado": true
         };
-        const response = await axios.put('http://localhost:8090/laempacadora/api/mesas/actualizar', jsonTable);
+        const response = await axios.put('https://mesamaster-backend.onrender.com/mesas/actualizar', jsonTable);
         setError('');
       }
     } catch (error) {
@@ -125,7 +125,7 @@ const OrderHome: React.FC = () => {
     useEffect(() => {
       const fetchMesas = async () => {
         try {
-          const response = await axios.get('http://localhost:8090/laempacadora/api/mesas/all');
+          const response = await axios.get('https://mesamaster-backend.onrender.com/mesas/all');
           const filteredMesas = response.data.filter((mesa: any) => mesa.idMesa !== 0 && !mesa.estado);
           setMesaList(filteredMesas);
         } catch (error) {
@@ -142,7 +142,7 @@ const OrderHome: React.FC = () => {
                 if (!token) {
                     return;
                 }
-                const response = await HttpAction.get(`http://localhost:8090/laempacadora/api/empleado/${token}`);
+                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/empleado/${token}`);
                 setUserData(response.data)
                 setUserId(response.data.idEmpleado)
                 setUserRol(response.data.rol)

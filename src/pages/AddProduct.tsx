@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import HttpAction from "../componets/middlewares/HttpAction";
 import {Container, Toolbar, Button, Typography, AppBar, Box, Drawer, List , ListItem, ListItemText, Tooltip, TableContainer, Table, TableHead, TableRow, TableCell, TableBody} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { styled } from '@mui/material/styles';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { IconButton,  IconButtonProps } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -117,10 +116,10 @@ const AddProduct: React.FC = () => {
           "idPedido": idPedido
         };
   
-        await axios.post('http://localhost:8090/laempacadora/api/detalleproducto/save', jsonUser);
+        await axios.post('https://mesamaster-backend.onrender.com/detalleproducto/save', jsonUser);
       }));
   
-      await axios.put('http://localhost:8090/laempacadora/api/pedidos/updateFinalPrice', jsonUserpf);
+      await axios.put('https://mesamaster-backend.onrender.com/pedidos/updateFinalPrice', jsonUserpf);
       navigate(`/InitialPage/${token}`);
   
     } catch (error) {
@@ -177,7 +176,7 @@ const updateDetallePedido = (newDetallePedido: DetallePedido) => {
                 if (!token) {
                     return;
                 }
-                const response = await HttpAction.get(`http://localhost:8090/laempacadora/api/empleado/${token}`);
+                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/empleado/${token}`);
                 setUserData(response.data)
                 setUserRol(response.data.rol)
                 setUserNombre(response.data.nombre);

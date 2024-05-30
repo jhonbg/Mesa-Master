@@ -62,7 +62,7 @@ const UserForm: React.FC = () => {
                 "estadoEmpleado": newUserEstado,
                 "salario": parseFloat(newUserSalario)
                 };
-            const response = await axios.post('http://localhost:8090/laempacadora/api/auth/register', jsonUser);
+            const response = await axios.post('https://mesamaster-backend.onrender.com/auth/register', jsonUser);
             setError('');
             handleOpenModal('Se ha creado un nuevo empleado.')
             navigate(`/InitialPage/${token}`);
@@ -86,7 +86,7 @@ const UserForm: React.FC = () => {
               if (!token) {
                   return;
               }
-              const response = await HttpAction.get(`http://localhost:8090/laempacadora/api/empleado/${token}`);
+              const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/empleado/${token}`);
               setUserData(response.data)
               setUserRol(response.data.rol)
               setUserNombre(response.data.nombre);

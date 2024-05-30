@@ -137,9 +137,9 @@ const ModalProductos: React.FC<ModalPedidoProps> = ({idPedido, open, onClose, up
   useEffect(() => {
     const fetchProductList = async () => {
       try {
-        let url = 'http://localhost:8090/laempacadora/api/productos/all';
+        let url = 'https://mesamaster-backend.onrender.com/productos/all';
         if (searchName !== '') {
-          url = `http://localhost:8090/laempacadora/api/productos/search/${searchName}`;
+          url = `https://mesamaster-backend.onrender.com/productos/search/${searchName}`;
         }
         const response = await axios.get(url);
         setProductList(response.data);

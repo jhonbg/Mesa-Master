@@ -38,7 +38,7 @@ const ProductForm: React.FC = () => {
                 "precio": parseFloat(newProductPrecio),
                 "descripcion": newProductDescripcion
                 };
-            const response = await axios.post('http://localhost:8090/laempacadora/api/productos/save', jsonUser);
+            const response = await axios.post('https://mesamaster-backend.onrender.com/productos/save', jsonUser);
             setError('');
             handleOpenModal('Producto creado correctamente.');
             navigate(`/ProductManager/${token}`)
@@ -86,7 +86,7 @@ const ProductForm: React.FC = () => {
                 if (!token) {
                     return;
                 }
-                const response = await HttpAction.get(`http://localhost:8090/laempacadora/api/empleado/${token}`);
+                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/empleado/${token}`);
                 setUserData(response.data)
                 setUserRol(response.data.rol)
                 setUserNombre(response.data.nombre);

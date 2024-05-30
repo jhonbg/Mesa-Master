@@ -55,7 +55,7 @@ const Pedidos: React.FC = () => {
 
   const handleRowClick = async (idPedido: number) => {
     setSelectedRow(idPedido);
-    const responseOrder = await axios.get(`http://localhost:8090/laempacadora/api/pedidos/${idPedido}`)
+    const responseOrder = await axios.get(`https://mesamaster-backend.onrender.com/pedidos/${idPedido}`)
     setpedidoSelect(responseOrder.data);
   };
 
@@ -65,7 +65,7 @@ const Pedidos: React.FC = () => {
         "idPedido": selectedRow,
         "estadoPedido": estado
       }
-      const response = await axios.put('http://localhost:8090/laempacadora/api/pedidos/updateState', jsonOrder)
+      const response = await axios.put('https://mesamaster-backend.onrender.com/pedidos/updateState', jsonOrder)
 
       setPedidosEnPreparacion(prevPedidos => prevPedidos.filter(pedido => pedido.idPedido !== selectedRow));
     }
@@ -90,14 +90,14 @@ const handleStateAndTable = async (estado: number) => {
       "idPedido": selectedRow,
       "estadoPedido": estado,
     };
-    const response = await axios.put('http://localhost:8090/laempacadora/api/pedidos/updateState', jsonOrder);
+    const response = await axios.put('https://mesamaster-backend.onrender.com/pedidos/updateState', jsonOrder);
     const jsonTable = {
       "idMesa": response.data.idMesa,
       "estado": false
     };
-    const responseTable = await axios.put('http://localhost:8090/laempacadora/api/mesas/actualizar', jsonTable);
+    const responseTable = await axios.put('https://mesamaster-backend.onrender.com/mesas/actualizar', jsonTable);
 
-    const responseOrder = await axios.get(`http://localhost:8090/laempacadora/api/pedidos/${selectedRow}`)
+    const responseOrder = await axios.get(`https://mesamaster-backend.onrender.com/pedidos/${selectedRow}`)
 
     setpedidoSelect(responseOrder.data);
 
@@ -117,7 +117,7 @@ const handleStateAndTable = async (estado: number) => {
 
   const handleChange = async (event: React.ChangeEvent<{}>, newValue: number) => {
     setActiveStep(newValue);
-    const response = await axios.get(`http://localhost:8090/laempacadora/api/pedidos/Estado/PEDIDO_${steps[newValue]}`);
+    const response = await axios.get(`https://mesamaster-backend.onrender.com/pedidos/Estado/PEDIDO_${steps[newValue]}`);
     setPedidosEnPreparacion(response.data);
   };
 
@@ -156,7 +156,7 @@ const handleStateAndTable = async (estado: number) => {
             if (!token) {
                 return;
             }
-            const response = await HttpAction.get(`http://localhost:8090/laempacadora/api/empleado/${token}`);
+            const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/empleado/${token}`);
             setUserData(response.data)
             setUserRol(response.data.rol)
             setUserNombre(response.data.nombre);
@@ -172,7 +172,7 @@ const handleStateAndTable = async (estado: number) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`http://localhost:8090/laempacadora/api/pedidos/Estado/PEDIDO_TOMADO`);
+      const response = await axios.get(`https://mesamaster-backend.onrender.com/pedidos/Estado/PEDIDO_TOMADO`);
       setPedidosEnPreparacion(response.data);
     };
 
