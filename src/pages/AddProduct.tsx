@@ -116,10 +116,10 @@ const AddProduct: React.FC = () => {
           "idPedido": idPedido
         };
   
-        await axios.post('https://mesamaster-backend.onrender.com/detalleproducto/save', jsonUser);
+        await axios.post('https://mesamaster-backend.onrender.com/api/detalleproducto/save', jsonUser);
       }));
   
-      await axios.put('https://mesamaster-backend.onrender.com/pedidos/updateFinalPrice', jsonUserpf);
+      await axios.put('https://mesamaster-backend.onrender.com/api/pedidos/updateFinalPrice', jsonUserpf);
       navigate(`/InitialPage/${token}`);
   
     } catch (error) {
@@ -176,7 +176,7 @@ const updateDetallePedido = (newDetallePedido: DetallePedido) => {
                 if (!token) {
                     return;
                 }
-                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/empleado/${token}`);
+                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/api/empleado/${token}`);
                 setUserData(response.data)
                 setUserRol(response.data.rol)
                 setUserNombre(response.data.nombre);

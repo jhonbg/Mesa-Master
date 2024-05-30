@@ -62,7 +62,7 @@ const NewOrder: React.FC = () => {
                 if (!token) {
                     return;
                 }
-                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/empleado/${token}`);
+                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/api/empleado/${token}`);
                 setUserData(response.data)
                 setUserRol(response.data.rol)
                 setUserNombre(response.data.nombre);
