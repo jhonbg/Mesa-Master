@@ -17,7 +17,7 @@ const LoginForm: React.FC = () => {
                 "idEmpleado": username,
                 "contraseña": password
                 } 
-            const response = await axios.post('https://mesamaster-backend.onrender.com/laempacadora/api/auth/login', jsonLogin);
+            const response = await axios.post('https://mesamaster-backend.onrender.com/api/auth/login', jsonLogin);
             if (response.data && response.data.token) {
                 const token = response.data.token;
                 localStorage.setItem('token', token);
