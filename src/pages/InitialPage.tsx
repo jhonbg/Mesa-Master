@@ -90,7 +90,7 @@ const InitialPage: React.FC = () => {
                 if (!token) {
                     return;
                 }
-                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/laempacadora/api/empleado/${token}`);
+                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/api/empleado/${token}`);
                 //console.log(response);
                 setUserData(response.data)
                 setUserRol(response.data.rol)
