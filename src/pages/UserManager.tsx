@@ -159,7 +159,7 @@ try {
       "estadoEmpleado": newUserEstado,
       "salario": parseFloat(newUserSalario)
       };  
-  const response = await axios.put('https://mesamaster-backend.onrender.com/empleado/update', jsonUser);
+  const response = await axios.put('https://mesamaster-backend.onrender.com/api/empleado/update', jsonUser);
   setError('');
   handleOpenModal('El empleado se actualizó correctamente.')
   setEditedEmployee(response.data);
@@ -229,7 +229,7 @@ useEffect(() => {
       useEffect(() => {
         const fetchEmployeeList = async () => {
           try {
-            const response = await axios.get('https://mesamaster-backend.onrender.com/empleado/all');
+            const response = await axios.get('https://mesamaster-backend.onrender.com/api/empleado/all');
               setEmployeeList(response.data);
           } catch (error) {
             console.error('Error fetching employee list:', error);
@@ -245,7 +245,7 @@ useEffect(() => {
                 if (!token) {
                     return;
                 }
-                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/empleado/${token}`);
+                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/api/empleado/${token}`);
                 setUserData(response.data)
                 setUserRol(response.data.rol)
                 setUserNombre(response.data.nombre);

@@ -123,7 +123,7 @@ try {
       "descripcion": newProductDescripcion
       };  
       console.log(jsonUser);
-  const response = await axios.put('https://mesamaster-backend.onrender.com/productos/update', jsonUser);
+  const response = await axios.put('https://mesamaster-backend.onrender.com/api/productos/update', jsonUser);
   setError('');
   setEditedProducto(response.data);
   handleOpenModal('El producto ha sido actualizado.');
@@ -179,9 +179,9 @@ useEffect(() => {
       useEffect(() => {
         const fetchProductList = async () => {
           try {
-            let url = 'https://mesamaster-backend.onrender.com/productos/all';
+            let url = 'https://mesamaster-backend.onrender.com/api/productos/all';
             if (searchName !== '') {
-              url = `https://mesamaster-backend.onrender.com/productos/search/${searchName}`;
+              url = `https://mesamaster-backend.onrender.com/api/productos/search/${searchName}`;
             }
             const response = await axios.get(url);
             setProductList(response.data);
@@ -198,7 +198,7 @@ useEffect(() => {
                 if (!token) {
                     return;
                 }
-                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/empleado/${token}`);
+                const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/api/empleado/${token}`);
                 setUserData(response.data)
                 setUserRol(response.data.rol)
                 setUserNombre(response.data.nombre);

@@ -18,7 +18,7 @@ const ModalCrearMesa: React.FC<ModalMessageProps> = ({ open, onClose, fetchMesas
             const jsonUser = {
                 "idMesa": mesa,
                 };
-            const response = await axios.post('https://mesamaster-backend.onrender.com/mesas/save', jsonUser);
+            const response = await axios.post('https://mesamaster-backend.onrender.com/api/mesas/save', jsonUser);
             setError('');
             fetchMesas();  
         } catch (error) {

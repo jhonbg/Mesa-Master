@@ -46,7 +46,7 @@ const ModalPedido: React.FC<ModalPedidoProps> = ({ open, onClose, pedido, handle
 
     useEffect(() => {
         if (pedido) {
-          fetch(`https://mesamaster-backend.onrender.com/detalleproducto/pedido/${pedido.idPedido}`)
+          fetch(`https://mesamaster-backend.onrender.com/api/detalleproducto/pedido/${pedido.idPedido}`)
             .then((response) => response.json())
             .then((data) => setDetallesPedido(data));
         }

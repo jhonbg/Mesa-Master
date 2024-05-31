@@ -56,7 +56,7 @@ const ViewTables: React.FC = () => {
 
   const fetchMesas = async () => {
     try {
-      const response = await axios.get('https://mesamaster-backend.onrender.com/mesas/all');
+      const response = await axios.get('https://mesamaster-backend.onrender.com/api/mesas/all');
       setMesaList(response.data);
     } catch (error) {
       console.error('Error fetching mesas:', error);
@@ -73,7 +73,7 @@ const ViewTables: React.FC = () => {
             if (!token) {
                 return;
             }
-            const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/empleado/${token}`);
+            const response = await HttpAction.get(`https://mesamaster-backend.onrender.com/api/empleado/${token}`);
             //console.log(response);
             setUserData(response.data)
             setUserRol(response.data.rol)
