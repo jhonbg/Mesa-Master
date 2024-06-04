@@ -228,7 +228,7 @@ const handleStateAndTable = async (estado: number) => {
             </ListItem>
           </List>
         </Drawer>
-      <div className='tablaPedido' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, maxWidth: '40%', width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, maxWidth: '40%', width: '100%' }}>
         <Tabs
           value={activeStep}
           onChange={handleChange}
@@ -242,7 +242,7 @@ const handleStateAndTable = async (estado: number) => {
             <Tab label={label} key={index}/>
           ))}
         </Tabs>
-        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+        <Box className='tablaPedido'  sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
           <StyledPaper elevation={3} sx={{ maxWidth: '100%', width: '100%', marginTop: 1, maxHeight: '700px', overflow: 'auto'}}>
             <Table>
               <TableHead>
