@@ -1,6 +1,6 @@
 @media (max-width: 900px) {
     .tablaPedido {
       width: 100vw;
-      max-width: 100%;
+      max-width: '60%';
     }
   }
