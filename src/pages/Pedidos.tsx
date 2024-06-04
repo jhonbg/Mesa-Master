@@ -192,7 +192,7 @@ const handleStateAndTable = async (estado: number) => {
               sx={{
                 flexGrow: 1,
                 fontfamily:  'Segoe UI',
-                fontWeight: 700,
+                fontWeight: "70%",
                 color: "rgb(243,164,102)",
                 WebkitTextStroke: '1px black', 
                 fontFamily:'cursive',
@@ -243,7 +243,7 @@ const handleStateAndTable = async (estado: number) => {
           ))}
         </Tabs>
         <Box className='tablaPedido'  sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
-          <StyledPaper elevation={3} sx={{ maxWidth: '100%', width: '100%', marginTop: 1, maxHeight: '700px', overflow: 'auto'}}>
+          <StyledPaper elevation={3} sx={{ maxWidth: '100%', width: '100%', marginTop: 1, maxHeight: '70%', overflow: 'auto'}}>
             <Table>
               <TableHead>
                 <TableRow>
