@@ -13,6 +13,12 @@
   }
 }
 
+@media (max-width: 600px) {
+  .tablaPedido {
+    max-width: 100%;
+  }
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
