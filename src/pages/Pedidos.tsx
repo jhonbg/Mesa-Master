@@ -251,7 +251,7 @@ const handleStateAndTable = async (estado: number) => {
                   <TableCell>Estado del Pedido</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody style={{ maxHeight: '700px', overflowY: 'auto' }}>
+              <TableBody style={{ maxHeight: '70%', overflowY: 'auto' }}>
                 {pedidosEnPreparacion.map((pedido: Pedido) => (
                   <TableRow key={pedido.idPedido} onClick={() => handleRowClick(pedido.idPedido)} selected={pedido.idPedido === selectedRow}>
                     <TableCell>{pedido.idMesa === 0 ? 'Domicilio' : pedido.idMesa}</TableCell>
