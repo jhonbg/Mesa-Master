@@ -228,7 +228,7 @@ const handleStateAndTable = async (estado: number) => {
             </ListItem>
           </List>
         </Drawer>
-      <div className='tablaPedido' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, maxWidth: '40%', width: '100%' }}>
+      <div className='tablaPedido' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, maxWidth: '70%', width: '100%' }}>
         <Tabs
           value={activeStep}
           onChange={handleChange}
