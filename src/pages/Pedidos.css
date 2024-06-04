@@ -1,9 +1,6 @@
 @media (max-width: 900px) {
     .tablaPedido {
+      width: 100vw;
       max-width: 100%;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      margin-top: 10px;
     }
   }
