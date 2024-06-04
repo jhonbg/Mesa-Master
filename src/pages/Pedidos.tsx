@@ -241,7 +241,15 @@ const handleStateAndTable = async (estado: number) => {
             <Tab label={label} key={index}/>
           ))}
         </Tabs>
-        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+        <Box sx={{
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    '@media (max-width: 900px)': {
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+  }}>
           <StyledPaper elevation={3} sx={{ maxWidth: '100%', width: '100%', marginTop: 1, maxHeight: '700px', overflow: 'auto'}}>
             <Table>
               <TableHead>
